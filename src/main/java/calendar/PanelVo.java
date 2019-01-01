@@ -6,6 +6,13 @@ public class PanelVo {
     private int weekday;
     private Map<Integer, String> weekMap;
 
+
+
+    public PanelVo(int weekday, Map<Integer, String> weekMap) {
+        this.weekday = weekday;
+        this.weekMap = weekMap;
+    }
+
     public int getWeekday() {
         return weekday;
     }
@@ -20,5 +27,10 @@ public class PanelVo {
 
     public void setWeekMap(Map<Integer, String> weekMap) {
         this.weekMap = weekMap;
+    }
+
+    @Override
+    public String toString() {
+        return weekday + " " + weekMap;
     }
 }

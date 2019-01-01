@@ -3,6 +3,7 @@ package calendar;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -10,43 +11,52 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String str = (new SimpleDateFormat("MM-dd- a E")).format(new Date());
 
-        System.out.println(str);
+
 
         List<Calendar> calendarList = Main.getCalendar();
-        List<List<PanelVo>> panelList;
 
-        panelList = new LinkedList<>();
+        List<PanelVo> panelVoList = new LinkedList<>();
+
+
+        HashMap<Integer, String> map = new HashMap<>();
 
         for (Calendar c : calendarList) {
-            List<PanelVo> week = new LinkedList<>();
-            if (c.getWeekday() != 1) {
-                PanelVo panelVo = new PanelVo();
-                String m, d;
-                if (c.getMonth() < 10) {
-                    m = "0" + c.getMonth();
-                } else {
-                    m = String.valueOf(c.getMonth());
-                }
-                if (c.getDay() < 10) {
-                    d = "0" + c.getDay();
-                } else {
-                    d = String.valueOf(c.getDay());
-                }
 
-                panelVo.setDate(m + "-" + d);
-                panelVo.setWeekday(c.getWeekday());
-
-                week.add(panelVo);
+            String m, d;
+            if (c.getMonth() < 10) {
+                m = "0" + c.getMonth();
             } else {
-                panelList.add(week);
+                m = String.valueOf(c.getMonth());
+            }
+            if (c.getDay() < 10) {
+                d = "0" + c.getDay();
+            } else {
+                d = String.valueOf(c.getDay());
+            }
+
+            if (c.getWeekday() != 1) {
+                map.put(c.getWeekday(), m + "-" + d);
+            } else {
+                panelVoList.add(new PanelVo(1, map));
+                map = new HashMap<>();
+                map.put(c.getWeekday(), m + "-" + d);
             }
         }
+        panelVoList.add(new PanelVo(1, map));
 
+//        for (PanelVo p : panelVoList) {
+//            System.out.println(p.getWeekMap());
+//            System.out.println("==============");
+//        }
 
-        System.out.println(panelList);
-
+        String str = (new SimpleDateFormat("MM-dd")).format(new Date());
+        str = "09-12";
+        for (PanelVo p : panelVoList) {
+            if (p.getWeekMap().containsValue(str)) {
+                System.out.println(p);
+            }
+        }
     }
 
     public static List<Calendar> getCalendar() {
