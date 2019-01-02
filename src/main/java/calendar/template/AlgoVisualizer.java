@@ -10,11 +10,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class AlgoVisualizer {
 
@@ -23,24 +25,27 @@ public class AlgoVisualizer {
     private AlgoFrame frame;    // 视图
     private List<PanelVo> panelList;
     private int counter;
+    private List<String> plList;
 
     public AlgoVisualizer(int sceneWidth, int sceneHeight){
 
         // 初始化数据
-        // TODO: 初始化数据
         panelList = Main.getCalendar();
+        plList = Arrays.asList("Java", "C", "C++", "Python", "Go", "Scala", "Clojure", "Groovy", "PHP", "Swift", "Lua",
+                "C#", "Scheme", "JavaScript", "Ruby", "Assembly", "Perl", "HTML", "CSS", "Erlang", "Haskell", "Object-C");
+
         // 初始化视图
         EventQueue.invokeLater(() -> {
-            frame = new AlgoFrame("Coding", sceneWidth, sceneHeight);
+            frame = new AlgoFrame("Calendar", sceneWidth, sceneHeight);
             // TODO: 根据情况决定是否加入键盘鼠标事件监听器
             frame.addKeyListener(new AlgoKeyListener());
             frame.addMouseListener(new AlgoMouseListener());
-            new Thread(this::run).start();
+            new Thread(this::home).start();
         });
     }
 
     // 动画逻辑
-    private void run() {
+    private void home() {
 
         String str = (new SimpleDateFormat("MM-dd")).format(new Date());
 
@@ -53,12 +58,23 @@ public class AlgoVisualizer {
                 break;
             }
         }
+
+        Random r = new Random();
+        int randomPl = r.nextInt(plList.size());
+        pd.setPl(plList.get(randomPl));
+
         setData(pd);
     }
 
     private void paint(int i) {
         PanelVo pd = panelList.get(counter);
         pd.setWeekday(i);
+
+
+        Random r = new Random();
+        int randomPl = r.nextInt(plList.size());
+        pd.setPl(plList.get(randomPl));
+
         setData(pd);
     }
 
@@ -84,7 +100,7 @@ public class AlgoVisualizer {
         public void keyReleased(KeyEvent e) {
             System.out.println(e.getKeyCode());
             if (e.getKeyCode() == 36) { //home
-                run();
+                home();
             } else if (e.getKeyCode() == 39) {  //right
                 if (counter < panelList.size()) {
                     counter ++;
@@ -97,6 +113,32 @@ public class AlgoVisualizer {
                 } else if (counter > 1) {
                     counter --;
                     paint(1);
+                }
+            } else if (e.getKeyCode() == 38) { //up
+
+            } else if (e.getKeyCode() == 40) { //down
+
+                PanelVo vo = panelList.get(counter);
+                int curMon = Integer.valueOf(vo.getWeekMap().get(2).substring(0, 2));
+                if (curMon < 12) {
+                    String date;
+                    if (curMon + 1 < 10) {
+                        date = "0" + (curMon + 1) + "-01";
+                    } else {
+                        date = curMon + 1 + "-01";
+                    }
+                    counter = getTodayCounter(date);
+                    vo = panelList.get(counter);
+
+                    int week = 1;
+                    for (Map.Entry<Integer, String> day : vo.getWeekMap().entrySet()) {
+                        String tem = day.getValue().substring(3, 5);
+                        if (tem.equals("01")) {
+                            week = day.getKey();
+                            break;
+                        }
+                    }
+                    paint(week);
                 }
             }
         }

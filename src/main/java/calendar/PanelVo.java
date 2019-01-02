@@ -4,6 +4,7 @@ import java.util.Map;
 
 public class PanelVo {
     private int weekday;
+    private String pl;
     private Map<Integer, String> weekMap;
 
     public PanelVo() {
@@ -33,5 +34,13 @@ public class PanelVo {
     @Override
     public String toString() {
         return weekday + " " + weekMap;
+    }
+
+    public String getPl() {
+        return pl;
+    }
+
+    public void setPl(String pl) {
+        this.pl = pl;
     }
 }

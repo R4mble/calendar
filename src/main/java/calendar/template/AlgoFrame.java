@@ -80,10 +80,23 @@ public class AlgoFrame extends JFrame{
             g2d.addRenderingHints(hints);
 
             // 具体绘制
-            // TODO： 绘制自己的数据data
 
+//            HashMap<String, String> plMap = new HashMap<>();
+//            plMap.put("Java", "Java语言作为静态面向对象编程语言的代表，极好地实现了面向对象理论，允许程序员以优雅的思维方式进行复杂的编程.");
 
-            AlgoVisHelper.drawText(g2d, "Java", 50, 50);
+            AlgoVisHelper.drawText(g2d, data.getPl(), 50, 50);
+
+//            String content = plMap.get("Java");
+//            int length = content.length();
+
+//            for (int i = 0; i < 3; i++) {
+//                AlgoVisHelper.drawText(g2d, content.substring(length / (i + 2), length / (i + 1)), "仿宋", 20, 50, 150 + 30 * i);
+//            }
+//
+//            AlgoVisHelper.drawText(g2d, content.substring(0, length / 3), "仿宋", 20, 200, 300 + 30 * 0);
+//            AlgoVisHelper.drawText(g2d, content.substring(length / 3, length / 3 * 2), "仿宋", 20, 200, 300 + 30 * 1);
+//            AlgoVisHelper.drawText(g2d, content.substring(length / 3 * 2, length), "仿宋", 20, 200, 300 + 30 * 2);
+//
 
             AlgoVisHelper.drawText(g2d, "2019-" + data.getWeekMap().get(data.getWeekday())
                     , 400, 80);
@@ -96,17 +109,28 @@ public class AlgoFrame extends JFrame{
             g2d.setStroke(dash);
 
             for (int i = 0; i < 7; i++) {
+
+                if (i + 1 == data.getWeekday()) {
+                    AlgoVisHelper.setColor(g2d, AlgoVisHelper.Red);
+                } else {
+                    AlgoVisHelper.setColor(g2d, AlgoVisHelper.Black);
+                }
+
                 AlgoVisHelper.fillRectangle(g2d, 10 + 70 * i, 400, 70, 80);
+
                 if (i == 0) {
                     AlgoVisHelper.drawText(g2d, weekdayMap.get(i + 1), 45 + 70 * i, 417);
                 } else {
                     AlgoVisHelper.drawText(g2d, weekdayMap.get(i + 1), 40 + 70 * i, 420);
                 }
+
                 if (data.getWeekMap().get(i + 1) == null) {
 
                 } else {
                     AlgoVisHelper.drawText(g2d, data.getWeekMap().get(i + 1), 20, 60 + 70 * i, 450);
                 }
+
+
             }
 
         }

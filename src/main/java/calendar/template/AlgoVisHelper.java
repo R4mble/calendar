@@ -108,4 +108,17 @@ public class AlgoVisHelper {
         g.setFont(f);
         g.drawString(text, centerx - w/2, centery + h);
     }
+
+    public static void drawText(Graphics2D g, String text, String font, int size, int centerx, int centery) {
+        if(text == null)
+            throw new IllegalArgumentException("Text is null in drawText function!");
+
+        FontMetrics metrics = g.getFontMetrics();
+        int w = metrics.stringWidth(text);
+        int h = metrics.getDescent();
+
+        Font f = new Font(font ,Font.BOLD, size);
+        g.setFont(f);
+        g.drawString(text, centerx - w/2, centery + h);
+    }
 }
