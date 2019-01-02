@@ -6,7 +6,8 @@ public class PanelVo {
     private int weekday;
     private Map<Integer, String> weekMap;
 
-
+    public PanelVo() {
+    }
 
     public PanelVo(int weekday, Map<Integer, String> weekMap) {
         this.weekday = weekday;
