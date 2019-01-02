@@ -16,7 +16,6 @@ public class PanelService {
 
     public static int counter;
 
-    // 动画逻辑
     public static void home() {
 
         String date = (new SimpleDateFormat("MM-dd")).format(new Date());

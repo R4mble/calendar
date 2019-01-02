@@ -73,5 +73,16 @@ public class CalendarHelper {
         return -1;
     }
 
+    public static List<String> getPLList() {
+        return Arrays.asList("Java", "C", "C++", "Python", "Go", "Scala", "Clojure", "Groovy", "PHP", "Swift", "Lua",
+                "C#", "Scheme", "JavaScript", "Ruby", "Assembly", "Perl", "HTML", "CSS", "Erlang", "Haskell", "Object-C",
+                "SQL", "Shell", "TypeScript", "VB");
+    }
+
+
+    public static void main(String[] args) {
+        System.out.println(getPLList().size());
+    }
+
 
 }

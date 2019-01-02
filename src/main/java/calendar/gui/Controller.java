@@ -21,8 +21,7 @@ public class Controller {
 
         // 初始化数据
         panelList = CalendarHelper.getCalendar();
-        plList = Arrays.asList("Java", "C", "C++", "Python", "Go", "Scala", "Clojure", "Groovy", "PHP", "Swift", "Lua",
-                "C#", "Scheme", "JavaScript", "Ruby", "Assembly", "Perl", "HTML", "CSS", "Erlang", "Haskell", "Object-C");
+        plList = CalendarHelper.getPLList();
 
         // 初始化视图
         EventQueue.invokeLater(() -> {

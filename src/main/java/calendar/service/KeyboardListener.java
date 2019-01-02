@@ -19,7 +19,7 @@ public class KeyboardListener extends KeyAdapter {
         if (e.getKeyCode() == 36) { //home
             home();
         } else if (e.getKeyCode() == 39) {  //right
-            if (PanelService.counter < panelList.size()) {
+            if (PanelService.counter < panelList.size() - 1) {
                 PanelService.counter ++;
             }
             paint(1);
