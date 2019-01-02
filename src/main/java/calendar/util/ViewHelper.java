@@ -1,4 +1,4 @@
-package calendar.gui;
+package calendar.util;
 
 import javax.swing.*;
 import java.awt.*;
