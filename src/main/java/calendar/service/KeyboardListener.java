@@ -48,10 +48,10 @@ public class KeyboardListener extends KeyAdapter {
         });
 
         keyboardWarriors.add(e -> {
-              if (e == 40) { //down
+              if (e == 40000) { //down
 
                 PanelVo vo = panelList.get(PanelService.counter);
-                int curMon = Integer.valueOf(vo.getWeekMap().get(2).substring(0, 2));
+                int curMon = Integer.valueOf(vo.getWeekMap().get(6).substring(0, 2));
                 if (curMon < 12) {
                     String date;
                     if (curMon + 1 < 10) {
@@ -76,7 +76,9 @@ public class KeyboardListener extends KeyAdapter {
         });
 
         keyboardWarriors.add(e -> {
+            if (e == 10) { //enter
 
+            }
         });
 
         keyboardWarriors.add(e -> {

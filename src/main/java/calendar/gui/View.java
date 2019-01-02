@@ -1,10 +1,13 @@
 package calendar.gui;
 
 import calendar.model.PanelVo;
+import calendar.service.KeyboardListener;
 import calendar.util.ViewHelper;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
 public class View extends JFrame{
@@ -22,6 +25,9 @@ public class View extends JFrame{
         this.canvasHeight = canvasHeight;
 
         AlgoCanvas canvas = new AlgoCanvas();
+
+
+
         setContentPane(canvas);
         pack();
 
@@ -88,6 +94,7 @@ public class View extends JFrame{
 //            ViewHelper.drawText(g2d, content.substring(length / 3 * 2, length), "仿宋", 20, 200, 300 + 30 * 2);
 //
 
+
             ViewHelper.drawText(g2d, "2019-" + data.getWeekMap().get(data.getWeekday())
                     , 400, 80);
 
@@ -119,9 +126,24 @@ public class View extends JFrame{
                 } else {
                     ViewHelper.drawText(g2d, data.getWeekMap().get(i + 1), 20, 60 + 70 * i, 450);
                 }
-
-
             }
+
+
+            JTextField textField = new JTextField();
+            textField.setBounds(new Rectangle(20, 150, 300, 40));
+
+            textField.addActionListener(e -> {
+                System.out.println(e.getActionCommand());
+            });
+
+            textField.addActionListener(e -> {
+                System.out.println(e.getWhen());
+            });
+
+            textField.addKeyListener(new KeyboardListener());
+
+
+            this.add(textField, null);
 
         }
 

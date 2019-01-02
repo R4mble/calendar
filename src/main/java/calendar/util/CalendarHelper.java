@@ -79,10 +79,8 @@ public class CalendarHelper {
                 "SQL", "Shell", "TypeScript", "VB");
     }
 
-
     public static void main(String[] args) {
-        System.out.println(getPLList().size());
+        System.out.println(getCalendar());
+
     }
-
-
 }
