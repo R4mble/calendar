@@ -12,7 +12,6 @@ import java.util.List;
 
 public class Controller {
 
-    private PanelVo data;        // 数据
     private static View frame;    // 视图
     public static List<PanelVo> panelList;
     public static List<String> plList;
