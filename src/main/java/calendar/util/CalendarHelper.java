@@ -1,28 +1,16 @@
-package calendar;
+package calendar.util;
+
+import calendar.model.Calendar;
+import calendar.model.PanelVo;
+import calendar.model.Weekday;
+import calendar.service.PanelService;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Main {
-
-    public static void main(String[] args) {
-
-
-//        for (PanelVo p : panelVoList) {
-//            System.out.println(p.getWeekMap());
-//            System.out.println("==============");
-//        }
-//
-//        String str = (new SimpleDateFormat("MM-dd")).format(new Date());
-//        str = "09-12";
-//        for (PanelVo p : panelVoList) {
-//            if (p.getWeekMap().containsValue(str)) {
-//                System.out.println(p);
-//            }
-//        }
-    }
+public class CalendarHelper {
 
     public static List<PanelVo> getCalendar() {
         List<Calendar> calendarList = new LinkedList<>();
@@ -74,4 +62,16 @@ public class Main {
 
         return panelVoList;
     }
+
+    public static int getDateCounter(List<PanelVo> panelList, String date) {
+        for (int i = 0; i < panelList.size(); i++) {
+            if (panelList.get(i).getWeekMap().containsValue(date)) {
+                PanelService.counter = i;
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
 }

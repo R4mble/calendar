@@ -1,4 +1,4 @@
-package calendar.template;
+package calendar.gui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,9 +6,9 @@ import java.awt.geom.*;
 
 import java.lang.InterruptedException;
 
-public class AlgoVisHelper {
+public class ViewHelper {
 
-    private AlgoVisHelper(){}
+    private ViewHelper(){}
 
     public static final Color Red = new Color(0xF44336);
     public static final Color Pink = new Color(0xE91E63);
