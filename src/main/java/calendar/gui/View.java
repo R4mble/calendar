@@ -50,8 +50,14 @@ public class View extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     private PanelVo data;
+    private String time;
     public void render(PanelVo data){
         this.data = data;
+        repaint();
+    }
+
+    public void render(String time){
+        this.time = time;
         repaint();
     }
 
@@ -100,6 +106,8 @@ public class View extends JFrame{
 
             ViewHelper.drawText(g2d, weekdayMap.get(data.getWeekday()), 400, 120);
 
+//            ViewHelper.drawText(g2d, time, 400, 160);
+
             Stroke dash = new BasicStroke(2.5f, BasicStroke.CAP_BUTT,
                     BasicStroke.JOIN_ROUND, 3.5f, new float[] { 15, 10, },
                     0f);
@@ -130,7 +138,7 @@ public class View extends JFrame{
 
 
             JTextField textField = new JTextField();
-            textField.setBounds(new Rectangle(20, 150, 300, 40));
+            textField.setBounds(new Rectangle(10, 150, 250, 40));
 
             textField.addActionListener(e -> {
                 System.out.println(e.getActionCommand());
@@ -143,7 +151,7 @@ public class View extends JFrame{
             textField.addKeyListener(new KeyboardListener());
 
 
-            this.add(textField, null);
+//            this.add(textField, null);
 
         }
 

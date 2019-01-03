@@ -1,0 +1,9 @@
+两种容器
+    重量级,顶级容器: JFrame JApplet JWindow JDialog
+    轻量级,继承自JComponent: JPanel, JScrollPane, JRootPane
+
+布局管理器 实现了LayoutManager接口的类
+    FlowLayout 从左到右,从上到下
+    BorderLayout 中心,和东南西北
+    GridLayout 网格布局
+

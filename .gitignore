@@ -13,6 +13,8 @@
 .sts4-cache
 .jar
 .MF
+/out/
+/META-INF/
 
 ### IntelliJ IDEA ###
 .idea
