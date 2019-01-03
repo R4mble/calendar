@@ -1,13 +1,10 @@
 package calendar.gui;
 
 import calendar.model.PanelVo;
-import calendar.service.KeyboardListener;
 import calendar.util.ViewHelper;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.util.HashMap;
 
 public class View extends JFrame{
@@ -20,20 +17,16 @@ public class View extends JFrame{
     public View(String title, int canvasWidth, int canvasHeight){
 
         super(title);
-
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
 
         AlgoCanvas canvas = new AlgoCanvas();
-
-
 
         setContentPane(canvas);
         pack();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-
         setVisible(true);
 
         weekdayMap = new HashMap<>();
@@ -50,7 +43,7 @@ public class View extends JFrame{
     public int getCanvasHeight(){return canvasHeight;}
 
     private PanelVo data;
-    private String time;
+    private String time = "";
     public void render(PanelVo data){
         this.data = data;
         repaint();
@@ -88,6 +81,7 @@ public class View extends JFrame{
 
             ViewHelper.drawText(g2d, data.getPl(), 50, 50);
 
+
 //            String content = plMap.get("Java");
 //            int length = content.length();
 
@@ -106,7 +100,7 @@ public class View extends JFrame{
 
             ViewHelper.drawText(g2d, weekdayMap.get(data.getWeekday()), 400, 120);
 
-//            ViewHelper.drawText(g2d, time, 400, 160);
+            ViewHelper.drawText(g2d, time, 400, 160);
 
             Stroke dash = new BasicStroke(2.5f, BasicStroke.CAP_BUTT,
                     BasicStroke.JOIN_ROUND, 3.5f, new float[] { 15, 10, },
@@ -148,7 +142,7 @@ public class View extends JFrame{
                 System.out.println(e.getWhen());
             });
 
-            textField.addKeyListener(new KeyboardListener());
+            textField.addKeyListener(new KeyboardController());
 
 
 //            this.add(textField, null);

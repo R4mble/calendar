@@ -1,5 +1,6 @@
 package calendar.service;
 
+import calendar.model.CalculateCounter;
 import calendar.model.PanelVo;
 import calendar.util.CalendarHelper;
 
@@ -8,13 +9,13 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Random;
 
-import static calendar.gui.Controller.panelList;
-import static calendar.gui.Controller.plList;
-import static calendar.gui.Controller.setData;
+import static calendar.Application.panelList;
+import static calendar.Application.plList;
+import static calendar.Application.setData;
+import static calendar.state.GlobalState.counter;
 
 public class PanelService {
 
-    public static int counter;
 
     public static void home() {
 
@@ -37,9 +38,14 @@ public class PanelService {
         setData(pd);
     }
 
-    public static void paint(int i) {
+    public static void turnPage(CalculateCounter cc) {
+        counter = cc.calculateCounter();
+        paint(1);
+    }
+
+    public static void paint(int weekday) {
         PanelVo pd = panelList.get(counter);
-        pd.setWeekday(i);
+        pd.setWeekday(weekday);
 
         Random r = new Random();
         int randomPl = r.nextInt(plList.size());

@@ -6,4 +6,3 @@
     FlowLayout 从左到右,从上到下
     BorderLayout 中心,和东南西北
     GridLayout 网格布局
-

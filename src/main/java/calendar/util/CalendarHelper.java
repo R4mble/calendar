@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import static calendar.state.GlobalState.counter;
 
 public class CalendarHelper {
 
@@ -27,19 +28,15 @@ public class CalendarHelper {
             } else {
                 day = 31;
             }
-
             for (int d = 1; d <= day; d++) {
                 calendarList.add(new Calendar(m, d, Weekday.get()));
             }
         }
 
         List<PanelVo> panelVoList = new LinkedList<>();
-
-
         HashMap<Integer, String> map = new HashMap<>();
 
         for (Calendar c : calendarList) {
-
             String m, d;
             if (c.getMonth() < 10) {
                 m = "0" + c.getMonth();
@@ -62,13 +59,15 @@ public class CalendarHelper {
         }
         panelVoList.add(new PanelVo(1, map));
 
+        panelVoList.get(0).getWeekMap().put(1, "12-31");
+
         return panelVoList;
     }
 
     public static int getDateCounter(List<PanelVo> panelList, String date) {
         for (int i = 0; i < panelList.size(); i++) {
             if (panelList.get(i).getWeekMap().containsValue(date)) {
-                PanelService.counter = i;
+                counter = i;
                 return i;
             }
         }

@@ -1,5 +1,4 @@
-package calendar.learn;
-
+package learn;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,10 +8,10 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Demo implements ActionListener {
+public class ButtonDemo implements ActionListener {
     JLabel jLabel;
 
-    public Demo() {
+    ButtonDemo() {
         JFrame jFrame = new JFrame("Simple Swing");
         jFrame.setLayout(new FlowLayout());
         jFrame.setSize(400, 400);
@@ -21,7 +20,7 @@ public class Demo implements ActionListener {
         JButton jButtonUp = new JButton("Up");
         JButton jButtonDown = new JButton("Down");
 
-        jButtonUp.addActionListener(e -> System.out.println(e.getActionCommand()));
+//        jButtonUp.addActionListener(e -> System.out.println(e.getActionCommand()));
         jButtonUp.addActionListener(this);
 
         jButtonDown.addActionListener(e -> System.out.println(e.getSource()));
@@ -36,6 +35,7 @@ public class Demo implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent event) {
+        System.out.println(event.getActionCommand());
         if (event.getActionCommand().equals("Up")) {
             jLabel.setText("You pressed up");
         } else {
@@ -44,6 +44,6 @@ public class Demo implements ActionListener {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(Demo::new);
+        SwingUtilities.invokeLater(ButtonDemo::new);
     }
 }
