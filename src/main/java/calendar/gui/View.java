@@ -11,6 +11,8 @@ public class View extends JFrame{
 
     private int canvasWidth;
     private int canvasHeight;
+    private PanelVo data;
+    private String time = "";
 
     private HashMap<Integer, String> weekdayMap;
 
@@ -42,8 +44,7 @@ public class View extends JFrame{
     public int getCanvasWidth(){return canvasWidth;}
     public int getCanvasHeight(){return canvasHeight;}
 
-    private PanelVo data;
-    private String time = "";
+
     public void render(PanelVo data){
         this.data = data;
         repaint();

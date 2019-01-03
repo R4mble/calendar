@@ -15,10 +15,6 @@ public class PanelVo {
         this.weekMap = weekMap;
     }
 
-    public int getWeekday() {
-        return weekday;
-    }
-
     public void setWeekday(int weekday) {
         this.weekday = weekday;
     }
@@ -42,5 +38,9 @@ public class PanelVo {
 
     public void setPl(String pl) {
         this.pl = pl;
+    }
+
+    public int getWeekday() {
+        return weekday;
     }
 }

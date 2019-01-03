@@ -1,7 +1,6 @@
 package calendar.gui;
 
 import calendar.model.Operation;
-import calendar.model.PanelVo;
 import calendar.service.KeyboardWarrior;
 import calendar.service.PanelService;
 
@@ -9,18 +8,15 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import static calendar.Application.panelList;
 import static calendar.state.GlobalState.counter;
-import static calendar.service.PanelService.paint;
-import static calendar.util.CalendarHelper.getDateCounter;
 
 public class KeyboardController extends KeyAdapter {
 
     private List<KeyboardWarrior> keyboardWarriors;
 
-    public void keyboardMapping(int keycode, Operation op) {
+    private void keyboardMapping(int keycode, Operation op) {
         keyboardWarriors.add(e -> {
             if (e == keycode) {
                 op.op();
@@ -31,26 +27,38 @@ public class KeyboardController extends KeyAdapter {
     public KeyboardController() {
         keyboardWarriors = new ArrayList<>();
 
-        //home
+        //home 回到今天
         keyboardMapping(36, PanelService::home);
 
-        //end
-        keyboardMapping(35, () -> PanelService.turnPage(() -> panelList.size() - 1));
+        //end 去最后一个周
+        keyboardMapping(35, () -> PanelService.turnPage(panelList.size() - 1));
 
-        //right
-        keyboardMapping(39, () ->
-                PanelService.turnPage(
-                        () -> (counter < panelList.size() - 1) ?
+        //page down 去下个周
+        keyboardMapping(33, () -> PanelService.turnPage(
+                        (counter < panelList.size() - 1) ?
                                 ++counter :
                                 counter));
 
-        //left
-        keyboardMapping(37, () ->
-                PanelService.turnPage(
-                        () -> (counter > 0) ?
-                        --counter:
+        //page up 去上个周
+        keyboardMapping(34, () -> PanelService.turnPage(
+                        (counter > 0) ?
+                        --counter :
                         counter));
 
+        //right 去明天
+        keyboardMapping(39, () ->
+                PanelService.paint(true));
+
+        //left 去昨天
+        keyboardMapping(37, () ->
+                PanelService.paint(false));
+
+
+        //enter
+        keyboardMapping(37, () -> PanelService.turnPage(
+                (counter > 0) ?
+                        --counter :
+                        counter));
 
 //        keyboardWarriors.add(e -> {
 //              if (e == 40000) { //down
@@ -79,7 +87,6 @@ public class KeyboardController extends KeyAdapter {
 //                }
 //            }
 //        });
-
 
     }
 

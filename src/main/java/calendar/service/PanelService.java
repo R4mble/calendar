@@ -13,6 +13,7 @@ import static calendar.Application.panelList;
 import static calendar.Application.plList;
 import static calendar.Application.setData;
 import static calendar.state.GlobalState.counter;
+import static calendar.state.GlobalState.weekDayCounter;
 
 public class PanelService {
 
@@ -27,32 +28,47 @@ public class PanelService {
         for (Map.Entry<Integer, String> day : pd.getWeekMap().entrySet()) {
             if (day.getValue().equals(date)) {
                 pd.setWeekday(day.getKey());
+                weekDayCounter = day.getKey();
                 break;
             }
         }
 
-        Random r = new Random();
-        int randomPl = r.nextInt(plList.size());
-        pd.setPl(plList.get(randomPl));
-
+        setRandomPl(pd);
         setData(pd);
     }
 
-    public static void turnPage(CalculateCounter cc) {
-        counter = cc.calculateCounter();
+    public static void turnPage(int cout) {
+        counter = cout;
         paint(1);
     }
 
     public static void paint(int weekday) {
         PanelVo pd = panelList.get(counter);
         pd.setWeekday(weekday);
-
-        Random r = new Random();
-        int randomPl = r.nextInt(plList.size());
-        pd.setPl(plList.get(randomPl));
-
+        setRandomPl(pd);
         setData(pd);
     }
 
+    public static void paint(boolean tomorrow) {
+        PanelVo pd = panelList.get(counter);
+        if (pd.getWeekday() == 1 || pd.getWeekday() == 7) {
+            return;
+        }
+
+        if (tomorrow) {
+            pd.setWeekday(++weekDayCounter);
+        } else {
+            pd.setWeekday(--weekDayCounter);
+        }
+
+        setRandomPl(pd);
+        setData(pd);
+    }
+
+    public static void setRandomPl(PanelVo pd) {
+        Random r = new Random();
+        int randomPl = r.nextInt(plList.size());
+        pd.setPl(plList.get(randomPl));
+    }
 
 }
