@@ -1,5 +1,6 @@
 package calendar.gui;
 
+import calendar.model.KeyCode;
 import calendar.model.Operation;
 import calendar.service.KeyboardWarrior;
 import calendar.service.PanelService;
@@ -27,35 +28,12 @@ public class KeyboardController extends KeyAdapter {
     public KeyboardController() {
         keyboardWarriors = new ArrayList<>();
 
-        //home 回到今天
-        keyboardMapping(36, PanelService::home);
+        registerTurnDate();
 
-        //end 去最后一个周
-        keyboardMapping(35, () -> PanelService.turnPage(panelList.size() - 1));
-
-        //page down 去下个周
-        keyboardMapping(33, () -> PanelService.turnPage(
-                        (counter < panelList.size() - 1) ?
-                                ++counter :
-                                counter));
-
-        //page up 去上个周
-        keyboardMapping(34, () -> PanelService.turnPage(
-                        (counter > 0) ?
-                        --counter :
-                        counter));
-
-        //right 去明天
-        keyboardMapping(39, () ->
-                PanelService.paint(true));
-
-        //left 去昨天
-        keyboardMapping(37, () ->
-                PanelService.paint(false));
 
 
         //enter
-        keyboardMapping(37, () -> PanelService.turnPage(
+        keyboardMapping(10, () -> PanelService.turnPage(
                 (counter > 0) ?
                         --counter :
                         counter));
@@ -87,6 +65,36 @@ public class KeyboardController extends KeyAdapter {
 //                }
 //            }
 //        });
+
+    }
+
+    private void registerTurnDate() {
+
+        //回到今天
+        keyboardMapping(KeyCode.Home, PanelService::home);
+
+        //去最后一个周
+        keyboardMapping(KeyCode.End, () -> PanelService.turnPage(panelList.size() - 1));
+
+        //去下个周
+        keyboardMapping(KeyCode.Down, () -> PanelService.turnPage(
+                (counter < panelList.size() - 1) ?
+                        ++counter :
+                        counter));
+
+        //去上个周
+        keyboardMapping(KeyCode.Up, () -> PanelService.turnPage(
+                (counter > 0) ?
+                        --counter :
+                        counter));
+
+        //去明天
+        keyboardMapping(KeyCode.Right, () ->
+                PanelService.paint(true));
+
+        //去昨天
+        keyboardMapping(KeyCode.Left, () ->
+                PanelService.paint(false));
 
     }
 
