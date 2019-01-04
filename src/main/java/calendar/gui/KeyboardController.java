@@ -30,42 +30,8 @@ public class KeyboardController extends KeyAdapter {
 
         registerTurnDate();
 
-
-
         //enter
-        keyboardMapping(10, () -> PanelService.turnPage(
-                (counter > 0) ?
-                        --counter :
-                        counter));
-
-//        keyboardWarriors.add(e -> {
-//              if (e == 40000) { //down
-//
-//                PanelVo vo = panelList.get(counter);
-//                int curMon = Integer.valueOf(vo.getWeekMap().get(6).substring(0, 2));
-//                if (curMon < 12) {
-//                    String date;
-//                    if (curMon + 1 < 10) {
-//                        date = "0" + (curMon + 1) + "-01";
-//                    } else {
-//                        date = curMon + 1 + "-01";
-//                    }
-//                    counter = getDateCounter(panelList, date);
-//                    vo = panelList.get(counter);
-//
-//                    int week = 1;
-//                    for (Map.Entry<Integer, String> day : vo.getWeekMap().entrySet()) {
-//                        String tem = day.getValue().substring(3, 5);
-//                        if (tem.equals("01")) {
-//                            week = day.getKey();
-//                            break;
-//                        }
-//                    }
-//                    paint(week);
-//                }
-//            }
-//        });
-
+        keyboardMapping(10, () -> PanelService.showTodoList());
     }
 
     private void registerTurnDate() {
