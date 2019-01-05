@@ -1,10 +1,14 @@
 package calendar.service;
 
 import calendar.model.PanelVo;
+import calendar.model.Todo;
 import calendar.util.CalendarHelper;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -77,4 +81,15 @@ public class PanelService {
     public static void showTodoList() {
 
     }
+
+    public static void editTodo() {
+        PanelVo pv = panelList.get(counter);
+        int weekday = pv.getWeekday();
+        if (pv.getWeekToDo() == null) {
+            pv.setWeekToDo(new HashMap<>());
+        }
+
+        setData(pv);
+    }
+
 }

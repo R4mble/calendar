@@ -1,8 +1,9 @@
 package calendar.gui;
 
-import calendar.model.KeyCode;
+import calendar.Application;
+import calendar.util.KeyCode;
 import calendar.model.Operation;
-import calendar.service.KeyboardWarrior;
+import calendar.model.KeyboardWarrior;
 import calendar.service.PanelService;
 
 import java.awt.event.KeyAdapter;
@@ -15,11 +16,19 @@ import static calendar.state.GlobalState.counter;
 
 public class KeyboardController extends KeyAdapter {
 
-    private List<KeyboardWarrior> keyboardWarriors;
+    private static List<KeyboardWarrior> keyboardWarriors;
 
-    private void keyboardMapping(int keycode, Operation op) {
+    private static void keyboardMapping(int keycode, Operation op) {
         keyboardWarriors.add(e -> {
-            if (e == keycode) {
+            if (e.getKeyCode() == keycode) {
+                op.op();
+            }
+        });
+    }
+
+    private static void keyboardShiftMapping(int keycode, Operation op) {
+        keyboardWarriors.add(e -> {
+            if (e.isShiftDown() && e.getKeyCode() == keycode) {
                 op.op();
             }
         });
@@ -30,11 +39,18 @@ public class KeyboardController extends KeyAdapter {
 
         registerTurnDate();
 
-        //enter
-        keyboardMapping(10, () -> PanelService.showTodoList());
+        keyboardMapping(KeyCode.Enter, () -> {
+            clearKeyboardWatcher();
+            PanelService.editTodo();
+        });
+
+        keyboardShiftMapping(KeyCode.Shift, () -> {
+            clearKeyboardWatcher();
+            Application.showCommandLine();
+        });
     }
 
-    private void registerTurnDate() {
+    private static void registerTurnDate() {
 
         //回到今天
         keyboardMapping(KeyCode.Home, PanelService::home);
@@ -61,12 +77,20 @@ public class KeyboardController extends KeyAdapter {
         //去昨天
         keyboardMapping(KeyCode.Left, () ->
                 PanelService.paint(false));
-
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        keyboardWarriors.forEach(k -> k.criticize(e.getKeyCode()));
+        keyboardWarriors.forEach(k -> k.criticize(e));
+
         System.out.println(e.getKeyCode());
+    }
+
+    public static void clearKeyboardWatcher() {
+        keyboardWarriors.clear();
+    }
+
+    public static void recoverKeyboardWatcher() {
+        registerTurnDate();
     }
 }

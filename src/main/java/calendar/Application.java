@@ -42,7 +42,7 @@ public class Application {
         {
             while (true)
             {
-                String time = new SimpleDateFormat("hh:mm:ss").format(new Date());
+                String time = new SimpleDateFormat("HH:mm:ss").format(new Date());
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
@@ -52,6 +52,10 @@ public class Application {
             }
         }
         ).start();
+    }
+
+    public static void showCommandLine() {
+        frame.render(true);
     }
 
     public static void main(String[] args) {
