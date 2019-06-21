@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Application {
 
-    private static View frame;    // 视图
+    private static View frame;
     public static List<PanelVo> panelList;
     public static List<String> plList;
 
