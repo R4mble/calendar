@@ -10,6 +10,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import static calendar.Application.panelList;
 import static calendar.state.GlobalState.counter;
@@ -26,9 +28,9 @@ public class KeyboardController extends KeyAdapter {
         });
     }
 
-    private static void keyboardShiftMapping(int keycode, Operation op) {
+    private static void keyboardShiftMapping(Operation op) {
         keyboardWarriors.add(e -> {
-            if (e.isShiftDown() && e.getKeyCode() == keycode) {
+            if (e.isShiftDown() && e.getKeyCode() == KeyCode.Shift) {
                 op.op();
             }
         });
@@ -44,7 +46,7 @@ public class KeyboardController extends KeyAdapter {
             PanelService.editTodo();
         });
 
-        keyboardShiftMapping(KeyCode.Shift, () -> {
+        keyboardShiftMapping(() -> {
             clearKeyboardWatcher();
             Application.showCommandLine();
         });
